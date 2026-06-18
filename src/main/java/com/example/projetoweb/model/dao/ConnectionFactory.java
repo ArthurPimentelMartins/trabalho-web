@@ -1,4 +1,4 @@
-package com.example.projetoweb.dao;
+package com.example.projetoweb.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,17 +18,6 @@ public class ConnectionFactory {
             throw new RuntimeException("Driver não encontrado.", e);
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao conectar no banco de dados.", e);
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            Connection conexao = ConnectionFactory.getConnection();
-            System.out.println("Sucesso! O Java está conectado ao MySQL!");
-            conexao.close();
-        } catch (Exception e) {
-            System.out.println("Ops, algo deu errado na conexão:");
-            e.printStackTrace();
         }
     }
 }
