@@ -1,0 +1,10 @@
+# Ignorar arquivos compilados do Java
+*.class
+
+# Ignorar pastas de configuração da IDE
+.idea/
+*.iml
+*.iws
+
+# Ignorar pasta de build
+target/
