@@ -84,6 +84,26 @@ public class VendaDAO {
         return vendaEncontrada;
     }
 
+    public void atualizar(Venda venda) {
+        String sql = "UPDATE venda SET id_cliente = ?, id_produto = ?, quantidade_comprada = ? WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, venda.getId_cliente());
+            stmt.setInt(2, venda.getId_produto());
+            stmt.setInt(3, venda.getQuantidade_comprada());
+            stmt.setInt(4, venda.getId());
+
+            stmt.executeUpdate();
+
+            System.out.println("Venda atualizada com sucesso no banco de dados!");
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar a venda: " + e.getMessage(), e);
+        }
+    }
+
     public void excluir(int id) {
 
         Venda vendaCancelada = buscarPorId(id);

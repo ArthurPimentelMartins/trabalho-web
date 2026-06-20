@@ -31,22 +31,22 @@
 
             <div class="menu-grid">
 
-                <a href="cliente.jsp" class="opcao-menu">
+                <a href="cliente.jsp?acao=listar" class="opcao-menu">
                     <i class="bi bi-person-vcard"></i>
                     <span>Cliente</span>
                 </a>
 
-                <a href="produto.jsp" class="opcao-menu">
+                <a href="produto.jsp?acao=listar" class="opcao-menu">
                     <i class="bi bi-bag fill"></i>
                     <span>Produto</span>
                 </a>
 
-                <a href="usuario.jsp" class="opcao-menu">
+                <a href="usuario.jsp?acao=listar" class="opcao-menu">
                     <i class="bi bi-person-lock"></i>
                     <span>Usuário</span>
                 </a>
 
-                <a href="venda.jsp" class="opcao-menu">
+                <a href="venda.jsp?acao=listar" class="opcao-menu">
                     <i class="bi bi-cart"></i>
                     <span>Venda</span>
                 </a>
