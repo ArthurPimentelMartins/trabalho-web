@@ -5,26 +5,37 @@ import com.example.projetoweb.model.entity.Usuario;
 
 public class UsuarioService {
 
-    private UsuarioDAO usuarioDao;
+    private UsuarioDAO usuarioDAO;
 
     public UsuarioService() {
-        this.usuarioDao = new UsuarioDAO();
+        this.usuarioDAO = new UsuarioDAO();
     }
 
-    public void cadastrarUsuario(Usuario usuario) throws Exception {
+    // ... (Os seus métodos existentes de cadastrar, listar, etc.) ...
 
-        if (usuario.getLogin() == null || usuario.getLogin().trim().isEmpty()) {
-            throw new Exception("Erro! O login do usuário é obrigatório.");
+    /**
+     * Tenta autenticar um utilizador com as credenciais fornecidas.
+     * @param login O login digitado.
+     * @param senha A senha digitada.
+     * @return O objeto Usuario se a autenticação for bem-sucedida.
+     * @throws Exception Se as credenciais forem inválidas.
+     */
+    public Usuario autenticar(String login, String senha) throws Exception {
+        if (login == null || login.trim().isEmpty()) {
+            throw new Exception("O campo Login não pode estar vazio.");
+        }
+        if (senha == null || senha.trim().isEmpty()) {
+            throw new Exception("O campo Senha não pode estar vazio.");
         }
 
-        if (usuario.getSenha() == null || usuario.getSenha().trim().isEmpty()) {
-            throw new Exception("Erro! A senha é obrigatória.");
+        // Chama o DAO para procurar na base de dados
+        Usuario usuarioAutenticado = usuarioDAO.buscarPorLoginESenha(login, senha);
+
+        if (usuarioAutenticado == null) {
+            // Se o DAO retornar null, significa que não encontrou ninguém com aquele login/senha
+            throw new Exception("Login ou senha inválidos.");
         }
 
-        if (usuario.getSenha().trim().length() < 4) {
-            throw new Exception("Erro! Por questões de segurança, a senha deve ter pelo menos 4 caracteres.");
-        }
-
-        usuarioDao.cadastrar(usuario);
+        return usuarioAutenticado;
     }
 }

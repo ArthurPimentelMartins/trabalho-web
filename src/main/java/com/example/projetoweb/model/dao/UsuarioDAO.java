@@ -10,6 +10,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAO {
+    public Usuario buscarPorLoginESenha(String login, String senha) {
+        Usuario usuarioEncontrado = null;
+
+        String sql = "SELECT * FROM usuario WHERE login = ? AND senha = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    usuarioEncontrado = new Usuario();
+                    usuarioEncontrado.setId(rs.getInt("id"));
+                    usuarioEncontrado.setLogin(rs.getString("login"));
+                    usuarioEncontrado.setSenha(rs.getString("senha"));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar o usuario por login e senha: " + e.getMessage(), e);
+        }
+
+        return usuarioEncontrado;
+    }
 
     public void cadastrar(Usuario usuario) {
 
@@ -30,6 +56,7 @@ public class UsuarioDAO {
             throw new RuntimeException("Erro ao cadastrar usuario no banco: " + e.getMessage(), e);
         }
     }
+
     public List<Usuario> listar() {
 
         List<Usuario> listaUsuarios = new ArrayList<>();
@@ -125,4 +152,3 @@ public class UsuarioDAO {
         }
     }
 }
-
