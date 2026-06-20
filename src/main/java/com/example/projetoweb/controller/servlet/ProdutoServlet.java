@@ -2,7 +2,7 @@ package com.example.projetoweb.controller.servlet;
 
 import com.example.projetoweb.model.entity.Produto;
 
-import com.example.projetoweb.model.service.ProdutosService;
+import com.example.projetoweb.model.service.ProdutoService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,10 +13,10 @@ import java.io.IOException;
 @WebServlet("/produto")
 public class ProdutoServlet extends HttpServlet {
 
-    private ProdutosService produtoService;
+    private ProdutoService produtoService;
 
     public ProdutoServlet() {
-        this.produtoService = new ProdutosService();
+        this.produtoService = new ProdutoService();
     }
 
     @Override
