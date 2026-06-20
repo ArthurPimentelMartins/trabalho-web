@@ -93,7 +93,7 @@ public class ClienteServlet extends HttpServlet {
             response.sendRedirect("cliente?acao=listar");
         } catch (Exception e) {
             request.setAttribute("mensagemErro", e.getMessage());
-            request.getRequestDispatcher("cadastro-cliente.jsp").forward(request, response);
+            request.getRequestDispatcher("cliente-cadastro.jsp").forward(request, response);
         }
     }
 
@@ -101,10 +101,16 @@ public class ClienteServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             String nome = request.getParameter("nome");
+            String email = request.getParameter("email");
+            String telefone = request.getParameter("telefone");
 
             Cliente cliente = new Cliente();
             cliente.setId(id);
             cliente.setNome(nome);
+            cliente.setEmail(email);
+            cliente.setTelefone(telefone);
+
+            clienteService.atualizarCliente(cliente);
 
             response.sendRedirect("cliente?acao=listar");
         } catch (Exception e) {
@@ -116,6 +122,9 @@ public class ClienteServlet extends HttpServlet {
     private void deletar(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
+
+            clienteService.deletarCliente(id);
+
             response.sendRedirect("cliente?acao=listar");
 
         } catch (Exception e) {
@@ -125,10 +134,13 @@ public class ClienteServlet extends HttpServlet {
     }
 
     private void listar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setAttribute("listaClientes", clienteService.listarClientes());
         request.getRequestDispatcher("lista-clientes.jsp").forward(request, response);
     }
 
     private void prepararAtualizacao(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        int id = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("cliente", clienteService.buscarPorId(id));
         request.getRequestDispatcher("editar-cliente.jsp").forward(request, response);
     }
 }

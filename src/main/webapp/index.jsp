@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -19,7 +20,7 @@
     <header class="cabecalho">
         <h1>APEX</h1>
 
-        <img src="src\main/webapp/img/logo.jpeg" alt="Logo da Empresa" class="logo">
+        <img src="img/logo.jpeg" alt="Logo da Empresa" class="logo">
     </header>
 
     <!-- Conteúdo -->
@@ -31,22 +32,22 @@
 
             <div class="menu-grid">
 
-                <a href="cliente.jsp?acao=listar" class="opcao-menu">
+                <a href="cliente?acao=listar" class="opcao-menu">
                     <i class="bi bi-person-vcard"></i>
                     <span>Cliente</span>
                 </a>
 
-                <a href="produto.jsp?acao=listar" class="opcao-menu">
+                <a href="produto?acao=listar" class="opcao-menu">
                     <i class="bi bi-bag fill"></i>
                     <span>Produto</span>
                 </a>
 
-                <a href="usuario.jsp?acao=listar" class="opcao-menu">
+                <a href="usuario?acao=listar" class="opcao-menu">
                     <i class="bi bi-person-lock"></i>
                     <span>Usuário</span>
                 </a>
 
-                <a href="venda.jsp?acao=listar" class="opcao-menu">
+                <a href="venda?acao=listar" class="opcao-menu">
                     <i class="bi bi-cart"></i>
                     <span>Venda</span>
                 </a>

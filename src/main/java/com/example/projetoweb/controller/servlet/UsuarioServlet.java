@@ -93,7 +93,7 @@ public class UsuarioServlet extends HttpServlet {
 
         } catch (Exception e) {
             request.setAttribute("mensagemErro", e.getMessage());
-            request.getRequestDispatcher("cadastro-usuario.jsp").forward(request, response);
+            request.getRequestDispatcher("usuario-cadastro.jsp").forward(request, response);
         }
     }
 
@@ -108,6 +108,8 @@ public class UsuarioServlet extends HttpServlet {
             usuario.setLogin(login);
             usuario.setSenha(senha);
 
+            usuarioService.atualizarUsuario(usuario);
+
             response.sendRedirect("usuario?acao=listar");
         } catch (Exception e) {
             request.setAttribute("mensagemErro", "Erro ao atualizar: " + e.getMessage());
@@ -119,6 +121,8 @@ public class UsuarioServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
 
+            usuarioService.deletarUsuario(id);
+
             response.sendRedirect("usuario?acao=listar");
         } catch (Exception e) {
             request.setAttribute("mensagemErro", e.getMessage());
@@ -127,10 +131,13 @@ public class UsuarioServlet extends HttpServlet {
     }
 
     private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("listaUsuarios", usuarioService.listarUsuarios());
         request.getRequestDispatcher("lista-usuarios.jsp").forward(request, response);
     }
 
     private void prepararAtualizacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("usuario", usuarioService.buscarPorId(id));
         request.getRequestDispatcher("editar-usuario.jsp").forward(request, response);
     }
 }

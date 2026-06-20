@@ -98,11 +98,11 @@ public class ProdutoServlet extends HttpServlet {
         } catch (NumberFormatException e) {
 
             request.setAttribute("mensagemErro", "Erro! Certifique-se de digitar valores numéricos válidos para Preço e Estoque.");
-            request.getRequestDispatcher("cadastro-produto.jsp").forward(request, response);
+            request.getRequestDispatcher("produto-cadastro.jsp").forward(request, response);
         } catch (Exception e) {
 
             request.setAttribute("mensagemErro", e.getMessage());
-            request.getRequestDispatcher("cadastro-produto.jsp").forward(request, response);
+            request.getRequestDispatcher("produto-cadastro.jsp").forward(request, response);
         }
     }
 
@@ -119,6 +119,8 @@ public class ProdutoServlet extends HttpServlet {
             produto.setPreco(preco);
             produto.setQuantidade_estoque(estoque);
 
+            produtoService.atualizarProduto(produto);
+
             response.sendRedirect("produto?acao=listar");
         } catch (Exception e) {
             request.setAttribute("mensagemErro", "Erro ao atualizar: " + e.getMessage());
@@ -130,6 +132,8 @@ public class ProdutoServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
 
+            produtoService.deletarProduto(id);
+
             response.sendRedirect("produto?acao=listar");
         } catch (Exception e) {
             request.setAttribute("mensagemErro", e.getMessage());
@@ -138,10 +142,13 @@ public class ProdutoServlet extends HttpServlet {
     }
 
     private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("listaProdutos", produtoService.listarProdutos());
         request.getRequestDispatcher("lista-produtos.jsp").forward(request, response);
     }
 
     private void prepararAtualizacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("produto", produtoService.buscarPorId(id));
         request.getRequestDispatcher("editar-produto.jsp").forward(request, response);
     }
 }

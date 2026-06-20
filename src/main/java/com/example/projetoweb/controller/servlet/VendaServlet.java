@@ -100,10 +100,10 @@ public class VendaServlet extends HttpServlet {
 
         } catch (NumberFormatException e) {
             request.setAttribute("mensagemErro", "Erro! IDs e quantidades devem ser valores numéricos válidos.");
-            request.getRequestDispatcher("cadastro-venda.jsp").forward(request, response);
+            request.getRequestDispatcher("venda-cadastro.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("mensagemErro", e.getMessage());
-            request.getRequestDispatcher("cadastro-venda.jsp").forward(request, response);
+            request.getRequestDispatcher("venda-cadastro.jsp").forward(request, response);
         }
     }
 
@@ -120,6 +120,8 @@ public class VendaServlet extends HttpServlet {
             venda.setId_produto(idProduto);
             venda.setQuantidade_comprada(quantidade);
 
+            vendaService.atualizarVenda(venda);
+
             response.sendRedirect("venda?acao=listar");
         } catch (Exception e) {
             request.setAttribute("mensagemErro", "Erro ao atualizar: " + e.getMessage());
@@ -131,6 +133,8 @@ public class VendaServlet extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
 
+            vendaService.deletarVenda(id);
+
             response.sendRedirect("venda?acao=listar");
         } catch (Exception e) {
             request.setAttribute("mensagemErro", e.getMessage());
@@ -139,10 +143,13 @@ public class VendaServlet extends HttpServlet {
     }
 
     private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("listaVendas", vendaService.listarVendas());
         request.getRequestDispatcher("lista-vendas.jsp").forward(request, response);
     }
 
     private void prepararAtualizacao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        request.setAttribute("venda", vendaService.buscarPorId(id));
         request.getRequestDispatcher("editar-venda.jsp").forward(request, response);
     }
 }
