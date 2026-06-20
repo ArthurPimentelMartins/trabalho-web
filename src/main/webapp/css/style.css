@@ -163,3 +163,44 @@ body{
         font-size: 2rem;
     }
 }
+
+
+
+.body {
+    background-color: #cfcfcf;
+}
+
+.card {
+    border-radius: 20px;
+    border: none;
+}
+
+.card h2 {
+    font-weight: bold;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.btn-sm {
+    margin-right: 5px;
+}
+
+
+.navbar {
+    min-height: 80px;
+}
+
+.navbar-brand img {
+    object-fit: cover;
+}
+
+.navbar-brand h5 {
+    margin: 0;
+    font-weight: bold;
+}
+
+.navbar-brand small {
+    color: #bdbdbd;
+}

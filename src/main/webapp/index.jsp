@@ -19,7 +19,7 @@
     <header class="cabecalho">
         <h1>APEX</h1>
 
-        <img src="src/main/webapp/img/logo.jpeg" alt="Logo da Empresa" class="logo">
+        <img src="src\main/webapp/img/logo.jpeg" alt="Logo da Empresa" class="logo">
     </header>
 
     <!-- Conteúdo -->
