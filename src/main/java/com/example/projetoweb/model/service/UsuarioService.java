@@ -3,6 +3,8 @@ package com.example.projetoweb.model.service;
 import com.example.projetoweb.model.dao.UsuarioDAO;
 import com.example.projetoweb.model.entity.Usuario;
 
+import java.util.List;
+
 public class UsuarioService {
 
     private UsuarioDAO usuarioDAO;
@@ -11,15 +13,6 @@ public class UsuarioService {
         this.usuarioDAO = new UsuarioDAO();
     }
 
-    // ... (Os seus métodos existentes de cadastrar, listar, etc.) ...
-
-    /**
-     * Tenta autenticar um utilizador com as credenciais fornecidas.
-     * @param login O login digitado.
-     * @param senha A senha digitada.
-     * @return O objeto Usuario se a autenticação for bem-sucedida.
-     * @throws Exception Se as credenciais forem inválidas.
-     */
     public Usuario autenticar(String login, String senha) throws Exception {
         if (login == null || login.trim().isEmpty()) {
             throw new Exception("O campo Login não pode estar vazio.");
@@ -28,14 +21,42 @@ public class UsuarioService {
             throw new Exception("O campo Senha não pode estar vazio.");
         }
 
-        // Chama o DAO para procurar na base de dados
         Usuario usuarioAutenticado = usuarioDAO.buscarPorLoginESenha(login, senha);
 
         if (usuarioAutenticado == null) {
-            // Se o DAO retornar null, significa que não encontrou ninguém com aquele login/senha
             throw new Exception("Login ou senha inválidos.");
         }
 
         return usuarioAutenticado;
+    }
+
+    public void cadastrarUsuario(Usuario usuario) throws Exception {
+        if (usuario.getLogin() == null || usuario.getLogin().trim().isEmpty()) {
+            throw new Exception("O login é obrigatório para cadastro.");
+        }
+        if (usuario.getSenha() == null || usuario.getSenha().trim().isEmpty()) {
+            throw new Exception("A senha é obrigatória para cadastro.");
+        }
+
+        usuarioDAO.cadastrar(usuario);
+    }
+
+    public List<Usuario> listarUsuarios() {
+        return usuarioDAO.listar();
+    }
+
+    public void atualizarUsuario(Usuario usuario) throws Exception {
+        if (usuario.getLogin() == null || usuario.getLogin().trim().isEmpty()) {
+            throw new Exception("O login não pode ser vazio na atualização.");
+        }
+        usuarioDAO.atualizar(usuario);
+    }
+
+    public void deletarUsuario(int id) {
+        usuarioDAO.excluir(id);
+    }
+
+    public Usuario buscarPorId(int id) {
+        return usuarioDAO.buscarPorId(id);
     }
 }
