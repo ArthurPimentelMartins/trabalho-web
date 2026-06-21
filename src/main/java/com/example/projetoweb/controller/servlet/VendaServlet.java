@@ -84,7 +84,6 @@ public class VendaServlet extends HttpServlet {
         String quantidadeInput = request.getParameter("quantidade");
 
         try {
-            // Conversão dos IDs e da quantidade para números inteiros
             int idCliente = Integer.parseInt(idClienteInput);
             int idProduto = Integer.parseInt(idProdutoInput);
             int quantidade = Integer.parseInt(quantidadeInput);
