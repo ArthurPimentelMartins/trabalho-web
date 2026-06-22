@@ -79,16 +79,16 @@ public class ClienteServlet extends HttpServlet {
     }
 
     private void cadastrar(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String nomeInput = request.getParameter("nome");
-        String emailInput = request.getParameter("email");
-        String telefoneInput = request.getParameter("telefone");
-
-        Cliente novoCliente = new Cliente();
-        novoCliente.setNome(nomeInput);
-        novoCliente.setEmail(emailInput);
-        novoCliente.setTelefone(telefoneInput);
-
         try {
+            String nomeInput = request.getParameter("nome");
+            String emailInput = request.getParameter("email");
+            String telefoneInput = request.getParameter("telefone");
+
+            Cliente novoCliente = new Cliente();
+            novoCliente.setNome(nomeInput);
+            novoCliente.setEmail(emailInput);
+            novoCliente.setTelefone(telefoneInput);
+
             clienteService.cadastrarCliente(novoCliente);
             response.sendRedirect("cliente?acao=listar");
         } catch (Exception e) {
