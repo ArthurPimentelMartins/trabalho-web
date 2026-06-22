@@ -28,7 +28,7 @@ public class SegurancaFilter implements Filter {
 
         String uri = req.getRequestURI();
 
-        boolean isRotaPublica = uri.endsWith("login.jsp") || uri.endsWith("/login") || uri.contains("/css/") || uri.contains("/imagens/");
+        boolean isRotaPublica = uri.endsWith("login.jsp") || uri.endsWith("/login") || uri.contains("/css/") || uri.contains("/img/");
 
         if (isRotaPublica) {
             chain.doFilter(request, response);

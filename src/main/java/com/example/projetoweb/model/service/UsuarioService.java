@@ -1,7 +1,6 @@
 package com.example.projetoweb.model.service;
 
 import com.example.projetoweb.model.dao.UsuarioDAO;
-import com.example.projetoweb.model.entity.Cliente;
 import com.example.projetoweb.model.entity.Usuario;
 
 import java.util.List;
