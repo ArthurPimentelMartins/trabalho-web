@@ -44,14 +44,14 @@ public class ClienteDAO {
 
             while (rs.next()) {
 
-                Cliente produto = new Cliente();
+                Cliente cliente = new Cliente();
 
-                produto.setId(rs.getInt("id"));
-                produto.setNome(rs.getString("nome"));
-                produto.setEmail(rs.getString("email"));
-                produto.setTelefone(rs.getString("telefone"));
+                cliente.setId(rs.getInt("id"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setEmail(rs.getString("email"));
+                cliente.setTelefone(rs.getString("telefone"));
 
-                listaClientes.add(produto);
+                listaClientes.add(cliente);
             }
 
         } catch (SQLException e) {

@@ -1,6 +1,7 @@
 package com.example.projetoweb.model.service;
 
 import com.example.projetoweb.model.dao.UsuarioDAO;
+import com.example.projetoweb.model.entity.Cliente;
 import com.example.projetoweb.model.entity.Usuario;
 
 import java.util.List;
@@ -31,13 +32,7 @@ public class UsuarioService {
     }
 
     public void cadastrarUsuario(Usuario usuario) throws Exception {
-        if (usuario.getLogin() == null || usuario.getLogin().trim().isEmpty()) {
-            throw new Exception("O login é obrigatório para cadastro.");
-        }
-        if (usuario.getSenha() == null || usuario.getSenha().trim().isEmpty()) {
-            throw new Exception("A senha é obrigatória para cadastro.");
-        }
-
+        validarDadosCliente(usuario);
         usuarioDAO.cadastrar(usuario);
     }
 
@@ -46,9 +41,7 @@ public class UsuarioService {
     }
 
     public void atualizarUsuario(Usuario usuario) throws Exception {
-        if (usuario.getLogin() == null || usuario.getLogin().trim().isEmpty()) {
-            throw new Exception("O login não pode ser vazio na atualização.");
-        }
+        validarDadosCliente(usuario);
         usuarioDAO.atualizar(usuario);
     }
 
@@ -58,5 +51,14 @@ public class UsuarioService {
 
     public Usuario buscarPorId(int id) {
         return usuarioDAO.buscarPorId(id);
+    }
+
+    private void validarDadosCliente(Usuario usuario) throws Exception {
+        if (usuario.getLogin() == null || usuario.getLogin().trim().isEmpty()) {
+            throw new Exception("O login é obrigatório para cadastro.");
+        }
+        if (usuario.getSenha() == null || usuario.getSenha().trim().isEmpty()) {
+            throw new Exception("A senha é obrigatória para cadastro.");
+        }
     }
 }

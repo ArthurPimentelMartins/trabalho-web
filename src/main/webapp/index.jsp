@@ -23,7 +23,6 @@
         <img src="img/logo.jpeg" alt="Logo da Empresa" class="logo">
     </header>
 
-    <!-- Conteúdo -->
     <main class="area-principal">
 
         <div class="menu-card">
