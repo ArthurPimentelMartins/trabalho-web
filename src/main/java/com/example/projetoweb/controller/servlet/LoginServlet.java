@@ -44,20 +44,4 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        String acao = request.getParameter("acao");
-
-        if ("sair".equals(acao)) {
-            HttpSession sessao = request.getSession(false);
-            if (sessao != null) {
-                sessao.invalidate();
-            }
-            response.sendRedirect("login.jsp");
-        } else {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        }
-    }
 }
